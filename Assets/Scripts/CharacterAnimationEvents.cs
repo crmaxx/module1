@@ -21,4 +21,9 @@ public class CharacterAnimationEvents : MonoBehaviour
 	{
 		character.SetState(Character.State.Idle);
 	}
+
+	void FistEnd()
+	{
+		character.SetState(Character.State.RunningFromEnemy);
+	}
 }

@@ -13,22 +13,23 @@ public class Character : MonoBehaviour
         Attack,
         BeginShoot,
         Shoot,
+        BeginPunch,
+        Punch,
     }
 
     public enum Weapon
     {
 	    Pistol,
         Bat,
+        Fist,
     }
 	
     public float runSpeed;
 	public float distanceFromEnemy;
-	
 	public Transform target;
 	public Weapon weapon;
 
     private Animator animator;
-
     private State state = State.Idle;
 	private Vector3 originalPosition;
 	private Quaternion originalRotation;
@@ -39,7 +40,8 @@ public class Character : MonoBehaviour
 		switch (weapon)
 		{
 			case Weapon.Bat:
-				state = State.RunningToEnemy;
+			case Weapon.Fist:
+                state = State.RunningToEnemy;
                 break;
 
             case Weapon.Pistol:
@@ -96,6 +98,16 @@ public class Character : MonoBehaviour
 				break;
 
 			case State.Shoot:
+				animator.SetFloat("speed", 0.0f);
+				break;
+
+			case State.BeginPunch:
+				animator.SetFloat("speed", 0.0f);
+				animator.SetTrigger("punch");
+				state = State.Punch;
+				break;
+
+			case State.Punch:
 				animator.SetFloat("speed", 0.0f);
 				break;
 
