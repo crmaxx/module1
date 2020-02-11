@@ -15,6 +15,7 @@ public class Character : MonoBehaviour
         Shoot,
         BeginPunch,
         Punch,
+        Death,
     }
 
     public enum Weapon
@@ -89,7 +90,7 @@ public class Character : MonoBehaviour
 
             case State.Attack:
 	            animator.SetFloat("speed", 0.0f);
-                break;
+	            break;
 
 			case State.BeginShoot:
 				animator.SetFloat("speed", 0.0f);
@@ -111,12 +112,23 @@ public class Character : MonoBehaviour
 				animator.SetFloat("speed", 0.0f);
 				break;
 
+            case State.Death:
+	            animator.SetFloat("speed", 0.0f);
+	            animator.SetTrigger("death");
+	            break;
+
 		}
     }
+
 
     public void SetState(State newState)
     {
 	    state = newState;
+    }
+
+    public void KillTarget()
+    {
+        target.GetComponent<Character>().SetState(State.Death);
     }
 
     bool RunTowards(Vector3 targetPosition, float distanceFromTarget)

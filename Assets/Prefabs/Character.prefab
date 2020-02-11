@@ -46,3 +46,4 @@ MonoBehaviour:
   runSpeed: 0.05
   distanceFromEnemy: 1.22
   target: {fileID: 0}
+  weapon: 0
