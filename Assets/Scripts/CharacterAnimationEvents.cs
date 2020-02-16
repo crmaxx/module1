@@ -17,7 +17,7 @@ public class CharacterAnimationEvents : MonoBehaviour
 
     void BatAttackEnd()
     {
-	    character.KillTarget();
+	    character.DamageTarget();
 	}
 
 	void ShootEnd()
@@ -27,7 +27,7 @@ public class CharacterAnimationEvents : MonoBehaviour
 
 	void ShootAttackEnd()
 	{
-		character.KillTarget();
+		character.DamageTarget();
 	}
 
 	void FistEnd()
@@ -37,7 +37,7 @@ public class CharacterAnimationEvents : MonoBehaviour
 
 	void FistAttackEnd()
 	{
-		character.KillTarget();
+		character.DamageTarget();
 	}
 
 	void DeathEnd()
