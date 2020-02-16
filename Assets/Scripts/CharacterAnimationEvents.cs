@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CharacterAnimationEvents : MonoBehaviour
 {
@@ -15,23 +13,36 @@ public class CharacterAnimationEvents : MonoBehaviour
     void AttackEnd()
     {
 	    character.SetState(Character.State.RunningFromEnemy);
+    }
+
+    void BatAttackEnd()
+    {
 	    character.KillTarget();
 	}
 
 	void ShootEnd()
 	{
 		character.SetState(Character.State.Idle);
+	}
+
+	void ShootAttackEnd()
+	{
 		character.KillTarget();
 	}
 
 	void FistEnd()
 	{
 		character.SetState(Character.State.RunningFromEnemy);
+	}
+
+	void FistAttackEnd()
+	{
 		character.KillTarget();
 	}
+
 	void DeathEnd()
 	{
-		character.SetState(Character.State.Idle);
+		character.SetState(Character.State.Death);
 		character.enabled = false;
 	}
 }
