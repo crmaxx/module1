@@ -41,6 +41,10 @@ public class LoadingLogicPage : MonoBehaviour
 		}
 
 		asyncLoading.allowSceneActivation = true;
+
+		while (!asyncLoading.isDone)
+			yield return null;
+
 		visualPart.SetActive(false);
 	}
 
