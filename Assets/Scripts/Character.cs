@@ -63,17 +63,17 @@ public class Character : MonoBehaviour
 		return state == State.Death;
 	}
 
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	private void Start()
     {
 	    animator = GetComponentInChildren<Animator>();
 	    originalPosition = transform.position;
 	    originalRotation = transform.rotation;
     }
 
-    // Update is called once per frame
-    // Чтобы не вычислять на сколько (delta_time) нужно сместиться в этом кадре, используем фиксированное значение кадров
-    void FixedUpdate()
+	// Update is called once per frame
+	// Чтобы не вычислять на сколько (delta_time) нужно сместиться в этом кадре, используем фиксированное значение кадров
+	private void FixedUpdate()
     {
 	    switch (state)
 	    {

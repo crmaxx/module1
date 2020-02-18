@@ -8,15 +8,15 @@ public class HealthIndicator : MonoBehaviour
 	private Health health;
 	private float displayedHealth;
 
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	private void Start()
     {
 	    health = GetComponent<Health>();
 	    displayedHealth = health.current - 1.0f;
     }
 
-    // Update is called once per frame
-    void Update()
+	// Update is called once per frame
+	private void Update()
     {
 	    float value = health.current;
 		// операция дорогая по этому

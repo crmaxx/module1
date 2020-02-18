@@ -9,16 +9,14 @@ public class GameController : MonoBehaviour
 	private bool waitingPlayerInput;
 	private Character currentTarget;
 
-	[ContextMenu("Player Move")]
-	void PlayerMove()
+	public void PlayerMove()
 	{
 		if (waitingPlayerInput)
 			waitingPlayerInput = false;
 	}
 
 	// TODO: refactor this
-	[ContextMenu("Switch Character")]
-	void SwitchCharacter()
+	public void SwitchCharacter()
 	{
 		for (int i = 0; i < enemyCharacters.Length; i++)
 		{
@@ -59,8 +57,8 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	private void Start()
     {
 	    StartCoroutine(GameLoop());
     }
@@ -103,7 +101,7 @@ public class GameController : MonoBehaviour
 		return false;
     }
 
-    private IEnumerator turnPlayers()
+    private IEnumerator TurnPlayers()
 	{
 		foreach (var player in playerCharacters)
 		{
@@ -131,7 +129,7 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-    private IEnumerator turnEnemies()
+    private IEnumerator TurnEnemies()
 	{
 		foreach (var enemy in enemyCharacters)
 		{
@@ -153,8 +151,8 @@ public class GameController : MonoBehaviour
     {
 	    while (!CheckEndGame())
 	    {
-		    yield return StartCoroutine(turnPlayers());
-		    yield return StartCoroutine(turnEnemies());
+		    yield return StartCoroutine(TurnPlayers());
+		    yield return StartCoroutine(TurnEnemies());
 	    }
 	}
 }
