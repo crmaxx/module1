@@ -179,6 +179,9 @@ public class Character : MonoBehaviour
 
 	public void DamageTarget()
 	{
+		var effect = target.GetComponent<HitEffectAnimation>();
+		effect.PlayEffect();
+		
 		var health = target.GetComponent<Health>();
 		if (health != null)
 		{
