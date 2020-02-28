@@ -19,6 +19,11 @@ public class LoadingLogicPage : MonoBehaviour
 	{
 		StartCoroutine(LoadGameSceneCoroutine(sceneName));
 	}
+	
+	public void RestartCurrentScene()
+	{
+		StartCoroutine(LoadGameSceneCor(SceneManager.GetActiveScene().buildIndex));
+	}
 
 	private IEnumerator LoadGameSceneCoroutine(string sceneName)
 	{
@@ -38,6 +43,30 @@ public class LoadingLogicPage : MonoBehaviour
 
 			yield return null;
 
+		}
+
+		asyncLoading.allowSceneActivation = true;
+
+		while (!asyncLoading.isDone)
+			yield return null;
+
+		visualPart.SetActive(false);
+	}
+	
+	private IEnumerator LoadGameSceneCor(int sceneIndex)
+	{
+		visualPart.SetActive(true);
+		AsyncOperation asyncLoading = SceneManager.LoadSceneAsync(sceneIndex);
+		asyncLoading.allowSceneActivation = false;
+
+		float timer = 0.0f;
+
+		while (timer < fakeLoadTime || asyncLoading.progress < 0.9f)
+		{
+			timer += Time.deltaTime;
+			SetProgressBarProgress(timer / fakeLoadTime);
+
+			yield return null;
 		}
 
 		asyncLoading.allowSceneActivation = true;

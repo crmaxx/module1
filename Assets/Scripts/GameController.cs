@@ -5,6 +5,10 @@ public class GameController : MonoBehaviour
 {
 	public Character[] playerCharacters;
 	public Character[] enemyCharacters;
+	
+	public GameObject onScreenButtons;
+	public GameObject gamePauseMenu;
+	public GameObject gameScoreMenu;
 
 	private bool waitingPlayerInput;
 	private Character currentTarget;
@@ -63,14 +67,36 @@ public class GameController : MonoBehaviour
 	    StartCoroutine(GameLoop());
     }
 
-    private void PlayerWon()
-    {
-        Debug.Log("Player won");
-    }
+	public void GamePause()
+	{
+		Debug.Log("Game pause");
+		Time.timeScale = 0.0f;
+		onScreenButtons.SetActive(false);
+		gamePauseMenu.SetActive(true);
+	}
 
-    private void PlayerLost()
+	public void GameResume()
+	{
+		Debug.Log("Game Resume");
+		Time.timeScale = 1.0f;
+		onScreenButtons.SetActive(true);
+		gamePauseMenu.SetActive(false);
+	}
+
+	void PlayerWon()
+	{
+		Debug.Log("Player won");
+		onScreenButtons.SetActive(false);
+		gameScoreMenu.GetComponent<GameScorePage>().SetGameStatus("Player won");
+		gameScoreMenu.SetActive(true);
+	}
+
+	void PlayerLost()
 	{
 		Debug.Log("Player lost");
+		onScreenButtons.SetActive(false);
+		gameScoreMenu.GetComponent<GameScorePage>().SetGameStatus("Player lost");
+		gameScoreMenu.SetActive(true);
 	}
 
     private Character FirstAliveCharacter(Character[] characters)
@@ -106,7 +132,7 @@ public class GameController : MonoBehaviour
 		foreach (var player in playerCharacters)
 		{
 			if (player.IsDeath())
-				continue; ;
+				continue;
 
 			Character target = FirstAliveCharacter(enemyCharacters);
 			if (target == null)

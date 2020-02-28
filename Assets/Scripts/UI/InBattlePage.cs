@@ -7,15 +7,12 @@ public class InBattlePage : MonoBehaviour
 
 	public Button attackButton;
 	public Button switchButton;
+	public Button pauseButton;
 
 	private void Awake()
 	{
-		attackButton.onClick.AddListener(OnAttackButtonClick);
+		attackButton.onClick.AddListener(() => gameController.PlayerMove());
 		switchButton.onClick.AddListener(() => gameController.SwitchCharacter());
-	}
-
-	private void OnAttackButtonClick()
-	{
-		gameController.PlayerMove();
+		pauseButton.onClick.AddListener(() => gameController.GamePause());
 	}
 }
