@@ -2,47 +2,47 @@
 
 public class CharacterAnimationEvents : MonoBehaviour
 {
-	private Character character;
+	private Character _character;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-	    character = GetComponentInParent<Character>();
+	    _character = GetComponentInParent<Character>();
     }
 
-    void AttackEnd()
+    private void AttackEnd()
     {
-	    character.SetState(Character.State.RunningFromEnemy);
+	    _character.SetState(Character.State.RunningFromEnemy);
     }
 
-    void BatAttackEnd()
+    private void BatAttackEnd()
     {
-	    character.DamageTarget();
+	    _character.DamageTarget();
 	}
 
-	void ShootEnd()
+    private void ShootEnd()
 	{
-		character.SetState(Character.State.Idle);
+		_character.SetState(Character.State.Idle);
 	}
 
-	void ShootAttackEnd()
+    private void ShootAttackEnd()
 	{
-		character.DamageTarget();
+		_character.DamageTarget();
 	}
 
-	void FistEnd()
+    private void FistEnd()
 	{
-		character.SetState(Character.State.RunningFromEnemy);
+		_character.SetState(Character.State.RunningFromEnemy);
 	}
 
-	void FistAttackEnd()
+    private void FistAttackEnd()
 	{
-		character.DamageTarget();
+		_character.DamageTarget();
 	}
 
-	void DeathEnd()
+    private void DeathEnd()
 	{
-		character.SetState(Character.State.Death);
-		character.enabled = false;
+		_character.SetState(Character.State.Death);
+		_character.enabled = false;
 	}
 }

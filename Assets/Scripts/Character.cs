@@ -179,15 +179,15 @@ public class Character : MonoBehaviour
 
 	public void DamageTarget()
 	{
-		var effect = target.GetComponent<HitEffectAnimation>();
-		effect.PlayEffect();
-		
-		var health = target.GetComponent<Health>();
-		if (health != null)
-		{
-			health.ApplyDamage(damage);
-			if (health.current <= 0.0f)
-				target.Die();
-		}
+		if (target.GetComponent<HitEffectAnimation>() is HitEffectAnimation effect)
+			effect.PlayEffect();
+
+		if (target.GetComponent<HitSoundPlayer>() is HitSoundPlayer sound)
+			sound.PlaySound();
+
+		if (!(target.GetComponent<Health>() is Health health)) return;
+		health.ApplyDamage(damage);
+		if (health.current <= 0.0f)
+			target.Die();
 	}
 }
